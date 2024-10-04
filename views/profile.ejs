@@ -1,0 +1,15 @@
+<%- include('partials/header', { title: 'Profile', user: user }) %>
+<%- include('partials/nav', { user: user }) %>
+
+<section class="profile">
+  <h1>Your Profile</h1>
+  <p><strong>Name:</strong> <%= user.name %></p>
+  <p><strong>Email:</strong> <%= user.email %></p>
+  <% if (user.isAdmin) { %>
+    <p><strong>Role:</strong> Admin</p>
+  <% } else { %>
+    <p><strong>Role:</strong> User</p>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

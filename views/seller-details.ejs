@@ -1,0 +1,22 @@
+<%- include('partials/header', { title: seller.name + ' Details' }) %>
+<%- include('partials/nav') %>
+
+<h1><%= seller.name %> Details</h1>
+<p><strong>Price per kg:</strong> #<%= seller.pricePerKg %></p>
+<p><strong>Location:</strong> <%= seller.location %></p>
+
+<form action="/orders/place" method="POST">
+  <input type="hidden" name="userId" value="<%= user._id %>">
+  <input type="hidden" name="sellerId" value="<%= seller._id %>">
+  <label for="quantity">Quantity (kg):</label>
+  <input type="number" id="quantity" name="quantityKg" min="1" required>
+  <label for="deliveryAddress">Enter Your Delivery Address:</label>
+  <input type="text" id="userAddress" name="deliveryAddress" required>
+  <label for="userPhoneNumber">Enter Your Phone Number:</label>
+  <input type="tel" id="userNumber" name="userPhoneNumber" required>
+  <button type="submit">Place Order</button>
+</form>
+
+<a href="/sellers">Back to Sellers</a>
+
+<%- include('partials/footer') %>

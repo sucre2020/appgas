@@ -1,0 +1,15 @@
+<%- include('partials/header', { title: 'Order History' }) %>
+<%- include('partials/nav') %>
+
+<h1>Order History</h1>
+<ul>
+  <% orders.forEach(order => { %>
+    <li>
+      <a href="/orders/<%= order._id %>">Order with <%= order.seller.name %> - #<%= order.totalPrice %></a>
+    </li>
+  <% }) %>
+</ul>
+
+<a href="/">Back to Home</a>
+
+<%- include('partials/footer') %>

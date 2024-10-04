@@ -1,0 +1,219 @@
+html, body { 
+  height: 100%; /* Ensures the body takes up the full height of the viewport */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  color: #333;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column; /* Makes the body a flex container */
+  min-height: 100vh; /* Ensure body takes at least the full viewport height */
+}
+
+header, footer {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+}
+
+footer {
+  margin-top: auto; /* Pushes the footer to the bottom */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Ensures footer elements don't overflow on small screens */
+}
+
+/* Logo alignment */
+.logo {
+  float: right;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+  flex-grow: 1; /* Ensures the content area takes up available space */
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Navbar styling */
+nav {
+  background-color: #007bff;
+  padding: 10px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  flex-wrap: wrap; /* Ensure menu wraps on small screens */
+}
+
+nav a {
+  color: white;
+  margin: 0 15px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: inline;
+}
+
+/* Button styling */
+.btn {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* Form styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Hero section */
+.hero {
+  background: url('/images/otherImages/gasImage.jpg') no-repeat center center/cover;
+  padding: 150px 0;
+  color: white;
+  text-align: center;
+}
+
+/* CTA button */
+.cta-button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.fix_user{
+  text-align: center;
+}
+
+/* Grid layout for sellers and admin sections */
+.sellers .card-grid, .admin-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.seller-card, .admin-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.sellers h2 {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Social links styling */
+.social-links {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Ensure social links fit well on small screens */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    width: 90%; /* Increase width to fill more space on smaller screens */
+  }
+
+  nav ul {
+    flex-direction: column; /* Stack menu items vertically */
+    align-items: center; /* Center align items */
+  }
+
+  nav a {
+    color: white;
+    margin: 0px;
+  }
+
+  .hero {
+    padding: 100px 0; /* Reduce padding on smaller screens */
+  }
+
+  .sellers .card-grid, .admin-sections {
+    grid-template-columns: 1fr; /* Display cards in a single column on smaller screens */
+  }
+
+  footer {
+    flex-direction: column; /* Stack footer items vertically */
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    padding: 8px 16px; /* Adjust button size on very small screens */
+    font-size: 14px;
+  }
+
+  nav ul {
+    gap: 10px; /* Reduce gap between menu items */
+  }
+
+  nav a {
+    color: white;
+    margin: 0px;
+  }
+}

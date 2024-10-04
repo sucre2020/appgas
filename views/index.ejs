@@ -1,0 +1,18 @@
+<%- include('partials/header', { title: 'Propane App' }) %>
+<%- include('partials/nav') %>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Order Gas with Ease</h1>
+    <p>Check the best prices and get fast delivery from trusted sellers.</p>
+    <a href="/sellers" class="cta-button">Find Sellers</a>
+  </div>
+</section>
+
+<% if (user) { %>
+  <p class="fix_user">Hello, <%= user.name %>! <a href="/auth/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></p>
+<% } else { %>
+  <p><a href="/auth/login">Login</a> or <a href="/auth/register">Register</a></p>
+<% } %>
+
+<%- include('partials/footer') %>

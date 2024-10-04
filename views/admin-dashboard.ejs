@@ -1,0 +1,54 @@
+<%- include('partials/header', { title: 'Admin Dashboard', user: user }) %>
+<%- include('partials/nav') %>
+
+<section class="admin-dashboard">
+  <h1>Admin Dashboard</h1>
+  
+  <div class="admin-sections">
+    <div class="admin-card">
+      <h2>Manage Sellers</h2>
+      <a href="/admin/add-seller" class="cta-button">Add New Seller</a>
+      <ul>
+        <% sellers.forEach(seller => { %>
+          <li><%= seller.name %> - $<%= seller.pricePerKg %> 
+            <a href="/admin/edit-seller/<%= seller._id %>">Edit</a>
+            <form action="/admin/delete-seller/<%= seller._id %>" method="POST" style="display:inline;">
+              <button type="submit">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="admin-card">
+      <h2>Manage Users</h2>
+      <a href="/admin/add-user" class="cta-button">Add New User</a>
+      <ul>
+        <% users.forEach(user => { %>
+          <li><%= user.name %> - <%= user.email %> 
+            <a href="/admin/edit-user/<%= user._id %>">Edit</a>
+            <form action="/admin/delete-user/<%= user._id %>" method="POST" style="display:inline;">
+              <button type="submit">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="admin-card">
+      <h2>Manage Orders</h2>
+      <ul>
+        <% orders.forEach(order => { %>
+          <li>Order by <%= order.user ? order.user.name : "Unknown User" %> 
+            for <%= order.quantityKg %> kg from <%= order.seller ? order.seller.name : "Unknown Seller" %>, 
+            Status: <%= order.status %>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<a href="/">Go Back to Home</a>
+
+<%- include('partials/footer') %>

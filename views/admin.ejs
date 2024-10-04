@@ -1,0 +1,8 @@
+<%- include('partials/header', { title: 'User Dashboard' }) %>
+<%- include('partials/nav') %>
+
+<h1>Welcome, <%= user.name %>!</h1>
+<p>This is your dashboard.</p>
+<a href="/auth/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+
+<%- include('partials/footer') %>

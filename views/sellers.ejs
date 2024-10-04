@@ -1,0 +1,24 @@
+<%- include('partials/header', { title: 'Sellers' }) %>
+<%- include('partials/nav') %>
+
+<section class="sellers">
+  <h2>Available Gas Sellers</h2>
+  <div class="card-grid">
+    <% sellers.forEach(seller => { %>
+      <div class="seller-card">
+        <img src="/images/otherImages/gas_stack.webp" width="50" alt="<%= seller.name %>" class="seller-image">
+        <div class="seller-info">
+          <h3><%= seller.name %></h3>
+          <p>Location: <%= seller.location %></p>
+          <p>Price: #<%= seller.pricePerKg %> per Kg</p>
+          <p>Contact: <%= seller.phoneNumber %></p>
+          <a href="/sellers/<%= seller._id %>" class="cta-button">Order Now</a>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<a href="/">Back to Home</a>
+
+<%- include('partials/footer') %>
