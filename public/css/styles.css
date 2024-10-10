@@ -1,3 +1,8 @@
+/* Reset and Basic Styles */
+* {
+  box-sizing: border-box;
+}
+
 html, body { 
   height: 100%; /* Ensures the body takes up the full height of the viewport */
   margin: 0;
@@ -7,12 +12,13 @@ html, body {
 body {
   font-family: 'Poppins', Arial, sans-serif;
   color: #333;
-  background-color: #f8f9fa;
+  background-color: #f0f2f5; /* Softer background color */
   display: flex;
   flex-direction: column; /* Makes the body a flex container */
   min-height: 100vh; /* Ensure body takes at least the full viewport height */
 }
 
+/* Header and Footer */
 header, footer {
   background-color: #007bff;
   color: white;
@@ -27,11 +33,14 @@ footer {
   flex-wrap: wrap; /* Ensures footer elements don't overflow on small screens */
 }
 
-/* Logo alignment */
+/* Logo Alignment */
 .logo {
-  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Container */
 .container {
   width: 80%;
   margin: auto;
@@ -39,6 +48,7 @@ footer {
   flex-grow: 1; /* Ensures the content area takes up available space */
 }
 
+/* Links */
 a {
   color: #007bff;
   text-decoration: none;
@@ -48,7 +58,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Navbar styling */
+/* Navbar Styling */
 nav {
   background-color: #007bff;
   padding: 10px;
@@ -59,6 +69,7 @@ nav ul {
   list-style: none;
   gap: 20px;
   flex-wrap: wrap; /* Ensure menu wraps on small screens */
+  justify-content: center; /* Center the navigation items */
 }
 
 nav a {
@@ -80,42 +91,224 @@ li {
   display: inline;
 }
 
-/* Button styling */
-.btn {
+/* Button Styling */
+.btn, .cta-button, .action-button {
   display: inline-block;
   font-size: 16px;
   font-weight: bold;
   color: #fff;
   background-color: #007bff;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 24px;
   text-align: center;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.btn:hover {
+.btn:hover, .cta-button:hover, .action-button:hover {
   background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
-/* Form styling */
-.form-group {
-  margin-bottom: 15px;
+/* Delete Button Specific Styling */
+.delete-button {
+  background-color: #dc3545;
 }
 
-.form-group label {
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Edit Button Specific Styling */
+.edit-button {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+/* View Button Specific Styling */
+.view-button {
+  background-color: #17a2b8;
+}
+
+.view-button:hover {
+  background-color: #138496;
+}
+
+/* Form Styling */
+.auth-container {
+  background-color: #fff;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.auth-form .form-group {
+  margin-bottom: 20px;
+}
+
+.auth-form label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
 }
 
-.form-group input, .form-group textarea {
+.auth-form input {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+  font-size: 16px;
 }
 
-/* Hero section */
+.auth-form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.toggle-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.toggle-link a {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.toggle-link a:hover {
+  text-decoration: underline;
+}
+
+/* Admin Dashboard Styling */
+.admin-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.admin-container h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.admin-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.admin-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  flex: 1 1 300px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.admin-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-list-item:last-child {
+  border-bottom: none;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name, .item-email, .item-price, .item-order, .item-details, .item-status {
+  font-size: 14px;
+  color: #555;
+}
+
+.item-name {
+  font-weight: 600;
+}
+
+.item-email {
+  font-style: italic;
+}
+
+.item-order, .item-details, .item-status {
+  margin-top: 4px;
+}
+
+.item-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-button {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+/* Delete Form Styling */
+.delete-form {
+  display: inline;
+}
+
+/* Back to Home Link */
+.back-home-link {
+  display: block;
+  text-align: center;
+  margin: 30px 0;
+  font-size: 16px;
+  color: #007bff;
+}
+
+.back-home-link:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
 .hero {
   background: url('/images/otherImages/gasImage.jpg') no-repeat center center/cover;
   padding: 150px 0;
@@ -123,20 +316,28 @@ li {
   text-align: center;
 }
 
-/* CTA button */
+/* CTA Button */
 .cta-button {
   background-color: #28a745;
   color: white;
   padding: 10px 20px;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.fix_user{
+.cta-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* Centering and Typography */
+.fix_user, .profile, .centreLoginRegister {
   text-align: center;
+  font-weight: bold;
 }
 
-/* Grid layout for sellers and admin sections */
+/* Grid Layout for Sellers and Admin Sections */
 .sellers .card-grid, .admin-sections {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -154,6 +355,7 @@ li {
   text-align: center;
 }
 
+/* Tables */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -161,11 +363,16 @@ table {
 }
 
 table th, table td {
-  padding: 10px;
+  padding: 12px 15px;
   border: 1px solid #ddd;
+  text-align: left;
 }
 
-/* Social links styling */
+table th {
+  background-color: #f4f4f4;
+}
+
+/* Social Links Styling */
 .social-links {
   display: flex;
   justify-content: space-between;
@@ -179,13 +386,7 @@ table th, table td {
   }
 
   nav ul {
-    flex-direction: column; /* Stack menu items vertically */
-    align-items: center; /* Center align items */
-  }
-
-  nav a {
-    color: white;
-    margin: 0px;
+    justify-content: center;
   }
 
   .hero {
@@ -200,11 +401,15 @@ table th, table td {
     flex-direction: column; /* Stack footer items vertically */
     text-align: center;
   }
+
+  .admin-card {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
-  .btn {
-    padding: 8px 16px; /* Adjust button size on very small screens */
+  .btn, .cta-button, .action-button {
+    padding: 10px 20px; /* Adjust button size on very small screens */
     font-size: 14px;
   }
 
@@ -212,8 +417,16 @@ table th, table td {
     gap: 10px; /* Reduce gap between menu items */
   }
 
-  nav a {
-    color: white;
-    margin: 0px;
+  .hero {
+    padding: 80px 0; /* Further reduce padding */
+  }
+
+  .admin-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-actions {
+    margin-top: 10px;
   }
 }

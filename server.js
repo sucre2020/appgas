@@ -6,10 +6,12 @@ const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/User");
 const MongoStore = require("connect-mongo");
 const dotenv = require("dotenv");
+//routes
 const dashboardRoutes = require("./routes/dashboard");
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
 const usersRoute = require("./routes/users");
+const paymentRoute = require("./routes/payment");
 
 dotenv.config();
 
@@ -82,6 +84,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use("/", usersRoute);
+app.use("/payment", paymentRoute);
 
 mongoose
   .connect(

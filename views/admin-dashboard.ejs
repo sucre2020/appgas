@@ -1,54 +1,114 @@
-<%- include('partials/header', { title: 'Admin Dashboard', user: user }) %>
-<%- include('partials/nav') %>
+<%- include('partials/header', { title: 'Admin Dashboard', user: user }) %> <%-
+include('partials/nav', { user: user }) %>
 
-<section class="admin-dashboard">
+<div class="admin-container">
   <h1>Admin Dashboard</h1>
-  
+
   <div class="admin-sections">
+    <!-- Manage Sellers Section -->
     <div class="admin-card">
-      <h2>Manage Sellers</h2>
-      <a href="/admin/add-seller" class="cta-button">Add New Seller</a>
-      <ul>
+      <div class="card-header">
+        <h2>Manage Sellers</h2>
+        <a href="/admin/add-seller" class="cta-button">Add New Seller</a>
+      </div>
+      <ul class="admin-list">
         <% sellers.forEach(seller => { %>
-          <li><%= seller.name %> - $<%= seller.pricePerKg %> 
-            <a href="/admin/edit-seller/<%= seller._id %>">Edit</a>
-            <form action="/admin/delete-seller/<%= seller._id %>" method="POST" style="display:inline;">
-              <button type="submit">Delete</button>
+        <li class="admin-list-item">
+          <div class="item-info">
+            <span class="item-name"><%= seller.name %></span>
+            <span class="item-price">#<%= seller.pricePerKg %> per Kg</span>
+          </div>
+          <div class="item-actions">
+            <a
+              href="/admin/edit-seller/<%= seller._id %>"
+              class="action-button edit-button"
+              >Edit</a
+            >
+            <form
+              action="/admin/delete-seller/<%= seller._id %>"
+              method="POST"
+              class="delete-form"
+            >
+              <button type="submit" class="action-button delete-button">
+                Delete
+              </button>
             </form>
-          </li>
+          </div>
+        </li>
         <% }) %>
       </ul>
     </div>
 
+    <!-- Manage Users Section -->
     <div class="admin-card">
-      <h2>Manage Users</h2>
-      <a href="/admin/add-user" class="cta-button">Add New User</a>
-      <ul>
+      <div class="card-header">
+        <h2>Manage Users</h2>
+        <a href="/admin/add-user" class="cta-button">Add New User</a>
+      </div>
+      <ul class="admin-list">
         <% users.forEach(user => { %>
-          <li><%= user.name %> - <%= user.email %> 
-            <a href="/admin/edit-user/<%= user._id %>">Edit</a>
-            <form action="/admin/delete-user/<%= user._id %>" method="POST" style="display:inline;">
-              <button type="submit">Delete</button>
+        <li class="admin-list-item">
+          <div class="item-info">
+            <span class="item-name"><%= user.name %></span>
+            <span class="item-email"><%= user.email %></span>
+          </div>
+          <div class="item-actions">
+            <a
+              href="/admin/edit-user/<%= user._id %>"
+              class="action-button edit-button"
+              >Edit</a
+            >
+            <form
+              action="/admin/delete-user/<%= user._id %>"
+              method="POST"
+              class="delete-form"
+            >
+              <button type="submit" class="action-button delete-button">
+                Delete
+              </button>
             </form>
-          </li>
+          </div>
+        </li>
         <% }) %>
       </ul>
     </div>
 
+    <!-- Manage Orders Section -->
     <div class="admin-card">
       <h2>Manage Orders</h2>
-      <ul>
+      <ul class="admin-list">
         <% orders.forEach(order => { %>
-          <li>Order by <%= order.user ? order.user.name : "Unknown User" %> 
-            for <%= order.quantityKg %> kg from <%= order.seller ? order.seller.name : "Unknown Seller" %>, 
-            Status: <%= order.status %>
-          </li>
+        <li class="admin-list-item">
+          <div class="item-info">
+            <span class="item-order"
+              >Order by
+              <strong
+                ><%= order.user ? order.user.name : "Unknown User" %></strong
+              ></span
+            >
+            <span class="item-details"
+              >for <strong><%= order.quantityKg %> kg</strong> from
+              <strong
+                ><%= order.seller ? order.seller.name : "Unknown Seller"
+                %></strong
+              ></span
+            >
+            <span class="item-status"
+              >Status: <strong><%= order.status %></strong></span
+            >
+          </div>
+          <div class="item-actions">
+            <a href="/orders/<%= order._id %>" class="action-button view-button"
+              >View Details</a
+            >
+          </div>
+        </li>
         <% }) %>
       </ul>
     </div>
   </div>
-</section>
+</div>
 
-<a href="/">Go Back to Home</a>
+<a href="/" class="back-home-link">Go Back to Home</a>
 
 <%- include('partials/footer') %>

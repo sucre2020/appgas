@@ -1,0 +1,51 @@
+<%- include('partials/header', { title: 'Add New Seller', user: user }) %>
+<%- include('partials/nav', { user: user }) %>
+
+<div class="admin-container">
+  <h1>Add New Seller</h1>
+  
+  <div class="admin-card">
+    <form action="/admin/add-seller" method="POST" class="admin-form">
+      <div class="form-group">
+        <label for="name">Seller Name:</label>
+        <input type="text" id="name" name="name" required placeholder="Enter seller name">
+      </div>
+      
+      <div class="form-group">
+        <label for="pricePerKg">Price Per Kg:</label>
+        <input type="number" id="pricePerKg" name="pricePerKg" required placeholder="Enter price per Kg">
+      </div>
+      
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required placeholder="Enter location">
+      </div>
+      
+      <div class="form-group">
+        <label for="rating">Rating:</label>
+        <input type="number" step="0.1" id="rating" name="rating" placeholder="Enter rating (optional)">
+      </div>
+      
+      <div class="form-group">
+        <label for="deliveryTime">Delivery Time:</label>
+        <input type="text" id="deliveryTime" name="deliveryTime" required placeholder="Enter delivery time">
+      </div>
+      
+      <div class="form-group">
+        <label for="emailAddress">Email Address:</label>
+        <input type="email" id="emailAddress" name="emailAddress" required placeholder="Enter email address">
+      </div>
+      
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required placeholder="Enter phone number">
+      </div>
+      
+      <button type="submit" class="btn">Add Seller</button>
+    </form>
+  </div>
+  
+  <a href="/admin/dashboard" class="back-home-link">Back to Dashboard</a>
+</div>
+
+<%- include('partials/footer') %>

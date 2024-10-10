@@ -82,23 +82,42 @@ router.post(
 );
 
 // Route to add a new seller
+// GET route to render the 'Add Seller' form
+router.get("/add-seller", ensureAuthenticated, ensureAdmin, (req, res) => {
+  res.render("admin-add-seller", { user: req.user });
+});
+
+// POST route to handle form submission and add a new seller
 router.post(
   "/add-seller",
   ensureAuthenticated,
   ensureAdmin,
   async (req, res) => {
-    const { name, location, pricePerKg, phoneNumber, emailAddress } = req.body;
+    const {
+      name,
+      pricePerKg,
+      location,
+      rating,
+      deliveryTime,
+      emailAddress,
+      phoneNumber,
+    } = req.body;
+
     try {
       const newSeller = new Seller({
         name,
-        location,
         pricePerKg,
-        phoneNumber,
+        location,
+        rating,
+        deliveryTime,
         emailAddress,
+        phoneNumber,
       });
+
       await newSeller.save();
-      res.redirect("/admin/dashboard");
+      res.redirect("/admin/dashboard"); // Redirect to the admin dashboard after adding a seller
     } catch (err) {
+      console.error("Error adding seller:", err);
       res.status(500).send("Error adding seller");
     }
   }

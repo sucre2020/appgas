@@ -12,7 +12,7 @@
 <% if (user) { %>
   <p class="fix_user">Hello, <%= user.name %>! <a href="/auth/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></p>
 <% } else { %>
-  <p><a href="/auth/login">Login</a> or <a href="/auth/register">Register</a></p>
+  <p class="centreLoginRegister"><a href="/auth/login">Login</a> or <a href="/auth/register">Register</a></p>
 <% } %>
 
 <%- include('partials/footer') %>

@@ -9,7 +9,8 @@ function ensureAdmin(req, res, next) {
   if (req.isAuthenticated() && req.user.isAdmin) {
     return next();
   }
-  res.redirect("/login"); // Redirect to login page if not admin
+  req.flash("error-msg", "Access denied. Admins only.");
+  res.redirect("/auth/login"); // Redirect to login page if not admin
 }
 
 module.exports.ensureAdmin = ensureAdmin;
