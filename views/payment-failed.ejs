@@ -1,11 +1,10 @@
-<%- include('partials/header', { title: 'Payment Failed' }) %>
-<%- include('partials/nav') %>
+<%- include('partials/header', { title: 'Payment Failed', user: user }) %>
+<%- include('partials/nav', { user: user }) %>
 
-<h1>Payment Failed</h1>
-<p>There was an issue processing your payment. Please try again.</p>
-
-<a href="/orders">Back to Orders</a>
-<a href="/sellers">Choose another seller</a>
-<a href="/">Back to Home</a>
+<div class="payment-failed-container">
+  <h1>Payment Failed</h1>
+  <p>Unfortunately, your payment could not be processed at this time.</p>
+  <a href="/orders" class="btn">Back to Order History</a>
+</div>
 
 <%- include('partials/footer') %>

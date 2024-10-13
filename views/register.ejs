@@ -1,3 +1,4 @@
+<!-- views/register.ejs -->
 <%- include('partials/header', { title: 'Register', user: user }) %>
 <%- include('partials/nav', { user: user }) %>
 
@@ -12,6 +13,11 @@
     <div class="form-group">
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required placeholder="Enter your email">
+    </div>
+    
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="text" id="phoneNumber" name="phoneNumber" required placeholder="Enter your phone number">
     </div>
     
     <div class="form-group">

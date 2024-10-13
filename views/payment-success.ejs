@@ -1,10 +1,10 @@
-<%- include('partials/header', { title: 'Payment Successful' }) %>
-<%- include('partials/nav') %>
+<%- include('partials/header', { title: 'Payment Success', user: user }) %>
+<%- include('partials/nav', { user: user }) %>
 
-<h1>Payment Successful!</h1>
-<p>Your order has been placed successfully. Thank you for your purchase!</p>
-
-<a href="/orders">View Your Orders</a>
-<a href="/">Go Back to Home</a>
+<div class="payment-success-container">
+  <h1>Payment Successful!</h1>
+  <p>Your payment has been completed successfully.</p>
+  <a href="/orders" class="btn">Back to Order History</a>
+</div>
 
 <%- include('partials/footer') %>

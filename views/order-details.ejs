@@ -2,21 +2,23 @@
 <%- include('partials/header', { title: 'Order Details', user: user }) %>
 <%- include('partials/nav', { user: user }) %>
 
-<h1>Order Details</h1>
-<p><strong>Seller:</strong> <%= order.seller.name %></p>
-<p><strong>Quantity:</strong> <%= order.quantityKg %> kg</p>
-<p><strong>Total Price:</strong> #<%= order.totalPrice %></p>
-<p><strong>Delivery Address:</strong> <%= order.deliveryAddress %></p>
-<p><strong>Phone Number:</strong> <%= order.user.phoneNumber %></p>
-<p><strong>Status:</strong> <%= order.status %></p>
-<p><strong>Payment Status:</strong> <%= order.paymentStatus %></p>
+<div class="order-details-container">
+  <h1>Order Details</h1>
+  <p><strong>Seller:</strong> <%= order.seller.name %></p>
+  <p><strong>Quantity:</strong> <%= order.quantityKg %> kg</p>
+  <p><strong>Total Price:</strong> #<%= order.totalPrice %></p>
+  <p><strong>Delivery Address:</strong> <%= order.deliveryAddress %></p>
+  <p><strong>Phone Number:</strong> <%= order.user.phoneNumber %></p>
+  <p><strong>Status:</strong> <%= order.status %></p>
+  <p><strong>Payment Status:</strong> <%= order.paymentStatus %></p>
 
-<% if (order.paymentStatus === "Pending") { %>
-  <form action="/payment/pay/<%= order._id %>" method="POST">
-    <button type="submit">Pay Now</button>
-  </form>
-<% } %>
+  <% if (order.paymentStatus === "Pending") { %>
+    <form action="/payment/pay/<%= order._id %>" method="POST">
+      <button type="submit" class="btn">Pay Now</button>
+    </form>
+  <% } %>
 
-<a href="/orders">Back to Order History</a>
+  <a href="/orders" class="btn">Back to Order History</a>
+</div>
 
 <%- include('partials/footer') %>
