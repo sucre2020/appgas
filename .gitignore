@@ -1,3 +1,4 @@
 node_modules
 insertSellers.js
 .env
+payments.js

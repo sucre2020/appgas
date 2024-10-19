@@ -1,25 +1,13 @@
-// routes/payment.js
 const express = require("express");
 const router = express.Router();
-const Flutterwave = require("flutterwave-node-v3");
+const axios = require("axios");
 const Order = require("../models/Order");
-const User = require("../models/User"); // Ensure User model is imported if needed
+const User = require("../models/User");
 const ensureAuthenticated = require("../middleware/ensureAuthenticated");
 const dotenv = require("dotenv");
 
 // Load environment variables from .env file
 dotenv.config();
-
-// Initialize Flutterwave with keys from environment variables for security
-const flw = new Flutterwave(
-  process.env.FLUTTERWAVE_PUBLIC_KEY,
-  process.env.FLUTTERWAVE_SECRET_KEY,
-  process.env.FLUTTERWAVE_ENCRYPTION_KEY // Added Encryption Key
-);
-
-// Debugging: Check if flw and flw.Charge are defined
-console.log("Flutterwave Instance:", flw);
-console.log("Flutterwave Charge Object:", flw.Charge); // Should now be defined
 
 // Route to initiate payment for an order
 router.post("/pay/:orderId", ensureAuthenticated, async (req, res) => {
@@ -44,28 +32,47 @@ router.post("/pay/:orderId", ensureAuthenticated, async (req, res) => {
       return res.status(400).send("User phone number is missing");
     }
 
-    // Initiate payment with Flutterwave using Charge.card
-    const payment = await flw.Charge.card({
-      tx_ref: `${orderId}-${Date.now()}`, // Unique transaction reference
-      amount: order.totalPrice,
-      currency: "NGN",
-      redirect_url: "http://localhost:3000/payment/verify",
-      customer: {
-        email: order.user.email,
-        phone_number: order.user.phoneNumber, // Use consistent field name
-        name: order.user.name,
-      },
-      // Optional: metadata ETC
-      meta: {
+    // Initiate payment with Paystack
+    const paymentData = {
+      email: order.user.email,
+      amount: order.totalPrice * 100, // Paystack requires amount in kobo (NGN)
+      reference: `${orderId}-${Date.now()}`, // Unique transaction reference
+      callback_url: `http://localhost:3000/payment/verify?orderId=${orderId}`,
+      metadata: {
         order_id: orderId,
+        custom_fields: [
+          {
+            display_name: "Phone Number",
+            variable_name: "phone_number",
+            value: order.user.phoneNumber,
+          },
+        ],
       },
-    });
+    };
 
-    if (payment.status === "success") {
-      console.log(`Payment initiated for order: ${orderId}`);
-      res.redirect(payment.meta.authorization.redirect); // Redirect to Flutterwave's payment page
+    // Make the API call to Paystack to initiate the payment
+    const response = await axios.post(
+      "https://api.paystack.co/transaction/initialize",
+      paymentData,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+        },
+      }
+    );
+
+    const { data } = response;
+
+    // Check if the payment initiation was successful (from Paystack's data object)
+    if (data.status) {
+      console.log(`Payment initiated successfully for order: ${orderId}`);
+      console.log(`Redirecting to: ${data.data.authorization_url}`);
+
+      // Use res.setHeader to force the redirect
+      res.setHeader("Location", data.data.authorization_url);
+      res.status(302).end(); // End the response with a redirect (302 Found)
     } else {
-      console.error(`Payment initiation failed for order: ${orderId}`, payment);
+      console.error(`Payment initiation failed for order: ${orderId}`, data);
       res.status(500).send("Payment initiation failed");
     }
   } catch (err) {
@@ -76,21 +83,27 @@ router.post("/pay/:orderId", ensureAuthenticated, async (req, res) => {
 
 // Route to verify payment after redirection
 router.get("/verify", async (req, res) => {
-  const transaction_id = req.query.transaction_id;
+  const { reference, orderId } = req.query;
 
   try {
-    if (!transaction_id) {
-      console.error("No transaction_id provided in verification");
+    if (!reference) {
+      console.error("No reference provided in verification");
       return res.status(400).send("Invalid transaction reference");
     }
 
-    // Verify the transaction with Flutterwave
-    const response = await flw.Transaction.verify({ id: transaction_id });
+    // Verify the transaction with Paystack
+    const response = await axios.get(
+      `https://api.paystack.co/transaction/verify/${reference}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+        },
+      }
+    );
 
-    if (response.status === "success") {
-      // Extract order ID from tx_ref
-      const [orderId] = response.data.tx_ref.split("-");
+    const { status, data } = response;
 
+    if (status === 200 && data.status === true) {
       // Update the order's payment status
       const order = await Order.findById(orderId).populate("user");
       if (!order) {
@@ -104,7 +117,7 @@ router.get("/verify", async (req, res) => {
       console.log(`Payment completed for order: ${orderId}`);
       res.render("payment-success", { order });
     } else {
-      console.warn(`Payment verification failed: ${response.message}`);
+      console.warn(`Payment verification failed: ${data.message}`);
       res.render("payment-failed");
     }
   } catch (err) {

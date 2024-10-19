@@ -10,6 +10,7 @@
   "author": "Efita Effiom",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^5.1.0",
@@ -22,6 +23,7 @@
     "mongosh": "^2.3.1",
     "nodemailer": "^6.9.15",
     "passport": "^0.7.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "paystack": "^2.0.1"
   }
 }

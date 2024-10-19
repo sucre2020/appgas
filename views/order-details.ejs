@@ -9,7 +9,7 @@
   <p><strong>Total Price:</strong> #<%= order.totalPrice %></p>
   <p><strong>Delivery Address:</strong> <%= order.deliveryAddress %></p>
   <p><strong>Phone Number:</strong> <%= order.user.phoneNumber %></p>
-  <p><strong>Status:</strong> <%= order.status %></p>
+  <!-- <p><strong>Status:</strong> <%= order.status %></p> -->
   <p><strong>Payment Status:</strong> <%= order.paymentStatus %></p>
 
   <% if (order.paymentStatus === "Pending") { %>
