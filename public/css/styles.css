@@ -458,6 +458,77 @@ input, select {
   text-decoration: underline;
 }
 
+/*Order Hispage page styling*/
+
+.order-history {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-history h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.order-history ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.order-history li {
+  background: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.order-history li a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.order-history li a:hover {
+  text-decoration: underline;
+}
+
+.order-history li span {
+  color: #999;
+  font-size: 1rem;
+}
+
+.order-history li .completed {
+  color: #28a745;
+}
+
+.order-history li .pending {
+  color: #dc3545;
+}
+
+.order-history a {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.order-history a:hover {
+  text-decoration: underline;
+}
+
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .container {

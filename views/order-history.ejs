@@ -1,3 +1,7 @@
+<%- include('partials/header', { title: 'Payment Success', user: user }) %>
+<%- include('partials/nav', { user: user }) %>
+
+<div class="order-history">
 <h1>Order History</h1>
 <ul>
   <% orders.forEach(order => { %>
@@ -9,3 +13,6 @@
 </ul>
 
 <a href="/">Back to Home</a>
+</div>
+
+<%- include('partials/footer') %>
