@@ -37,7 +37,8 @@ router.post("/pay/:orderId", ensureAuthenticated, async (req, res) => {
       email: order.user.email,
       amount: order.totalPrice * 100, // Paystack requires amount in kobo (NGN)
       reference: `${orderId}-${Date.now()}`, // Unique transaction reference
-      callback_url: `http://localhost:3000/payment/verify?orderId=${orderId}`,
+      // callback_url: `http://localhost:3000/payment/verify?orderId=${orderId}`,
+      callback_url: `${process.env.BASE_URL}/payment/verify?orderId=${orderId}`,
       metadata: {
         order_id: orderId,
         custom_fields: [
