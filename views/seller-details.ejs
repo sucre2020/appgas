@@ -1,22 +1,83 @@
 <%- include('partials/header', { title: seller.name + ' Details' }) %>
 <%- include('partials/nav') %>
 
+<div class="order-details-container">
+
 <h1><%= seller.name %> Details</h1>
 <p><strong>Price per kg:</strong> #<%= seller.pricePerKg %></p>
 <p><strong>Location:</strong> <%= seller.location %></p>
 
-<form action="/orders/place" method="POST">
+<form action="/orders/place" method="POST" class="order-form">
   <input type="hidden" name="userId" value="<%= user._id %>">
   <input type="hidden" name="sellerId" value="<%= seller._id %>">
+
   <label for="quantity">Quantity (kg):</label>
   <input type="number" id="quantity" name="quantityKg" min="1" required>
-  <label for="deliveryAddress">Enter Your Delivery Address:</label>
+
+  <label for="deliveryAddress">Enter Delivery Address Number:</label>
   <input type="text" id="userAddress" name="deliveryAddress" required>
+
+  <label for="deliveryStreet">Enter Street Name:</label>
+  <input type="text" id="userStreet" name="deliveryStreet" required>
+
+  <label for="deliveryCity">Enter City:</label>
+  <input type="text" id="userCity" name="deliveryCity" required>
+
+  <label for="deliveryState">Select State:</label>
+  <select id="userState" name="deliveryState" required>
+    <option value="" disabled selected>Select delivery state</option>
+    <option value="abia">Abia</option>
+    <option value="adamawa">Adamawa</option>
+    <option value="akwa-ibom">Akwa Ibom</option>
+    <option value="anambra">Anambra</option>
+    <option value="bauchi">Bauchi</option>
+    <option value="bayelsa">Bayelsa</option>
+    <option value="benue">Benue</option>
+    <option value="borno">Borno</option>
+    <option value="cross-river">Cross River</option>
+    <option value="delta">Delta</option>
+    <option value="ebonyi">Ebonyi</option>
+    <option value="edo">Edo</option>
+    <option value="ekiti">Ekiti</option>
+    <option value="enugu">Enugu</option>
+    <option value="gombe">Gombe</option>
+    <option value="imo">Imo</option>
+    <option value="jigawa">Jigawa</option>
+    <option value="kaduna">Kaduna</option>
+    <option value="kano">Kano</option>
+    <option value="katsina">Katsina</option>
+    <option value="kebbi">Kebbi</option>
+    <option value="kogi">Kogi</option>
+    <option value="kwara">Kwara</option>
+    <option value="lagos">Lagos</option>
+    <option value="nasarawa">Nasarawa</option>
+    <option value="niger">Niger</option>
+    <option value="ogun">Ogun</option>
+    <option value="ondo">Ondo</option>
+    <option value="osun">Osun</option>
+    <option value="oyo">Oyo</option>
+    <option value="plateau">Plateau</option>
+    <option value="rivers">Rivers</option>
+    <option value="sokoto">Sokoto</option>
+    <option value="taraba">Taraba</option>
+    <option value="yobe">Yobe</option>
+    <option value="zamfara">Zamfara</option>
+    <option value="fct-abuja">Federal Capital Territory (Abuja)</option>
+  </select>
+
   <label for="userPhoneNumber">Enter Your Phone Number:</label>
-  <input type="tel" id="userNumber" name="userPhoneNumber" required>
-  <button type="submit">Place Order</button>
+  <input type="tel" id="userNumber" pattern="\d{11}" maxlength="11" name="userPhoneNumber" placeholder="Enter 11 Digits Phone Number" required>
+
+  <!-- <button type="submit" class="centralized-item">Place Order</button>
 </form>
 
-<a href="/sellers">Back to Sellers</a>
+<a href="/sellers" class="centralized-item">Back to Sellers</a> -->
+
+<div class="centralized-container">
+  <button type="submit" class="btn">Place Order</button>
+  <a href="/sellers" class="back-link">Back to Sellers</a>
+</div>
+
+</div>
 
 <%- include('partials/footer') %>

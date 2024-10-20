@@ -12,8 +12,16 @@ router.use((req, res, next) => {
 
 // Route to place an order
 router.post("/place", async (req, res) => {
-  const { userId, sellerId, quantityKg, deliveryAddress, userPhoneNumber } =
-    req.body;
+  const {
+    userId,
+    sellerId,
+    quantityKg,
+    deliveryAddress,
+    deliveryStreet,
+    deliveryCity,
+    deliveryState,
+    userPhoneNumber,
+  } = req.body;
 
   try {
     // Ensure all required fields are present
@@ -22,6 +30,9 @@ router.post("/place", async (req, res) => {
       !sellerId ||
       !quantityKg ||
       !deliveryAddress ||
+      !deliveryStreet ||
+      !deliveryCity ||
+      !deliveryState ||
       !userPhoneNumber
     ) {
       return res.status(400).send("Missing required fields");
@@ -41,6 +52,9 @@ router.post("/place", async (req, res) => {
       quantityKg,
       totalPrice,
       deliveryAddress,
+      deliveryStreet,
+      deliveryCity,
+      deliveryState,
       userPhoneNumber,
     });
 

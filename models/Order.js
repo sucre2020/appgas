@@ -24,10 +24,22 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // userPhoneNumber: {
-  //   type: Number,
-  //   required: true,
-  // },
+  deliveryStreet: {
+    type: String,
+    required: true,
+  },
+  deliveryCity: {
+    type: String,
+    required: true,
+  },
+  deliveryState: {
+    type: String,
+    required: true,
+  },
+  userPhoneNumber: {
+    type: Number,
+    required: true,
+  },
   status: {
     type: String,
     enum: ["Pending", "Processing", "In-Transit", "Delivered"],

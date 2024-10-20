@@ -7,10 +7,20 @@
   <p><strong>Seller:</strong> <%= order.seller.name %></p>
   <p><strong>Quantity:</strong> <%= order.quantityKg %> kg</p>
   <p><strong>Total Price:</strong> #<%= order.totalPrice %></p>
-  <p><strong>Delivery Address:</strong> <%= order.deliveryAddress %></p>
-  <p><strong>Phone Number:</strong> <%= order.user.phoneNumber %></p>
-  <!-- <p><strong>Status:</strong> <%= order.status %></p> -->
+  <p><strong>Delivery Address Number:</strong> <%= order.deliveryAddress %></p>
+  <p><strong>Delivery Street:</strong> <%= order.deliveryStreet %></p>
+  <p><strong>Delivery City:</strong> <%= order.deliveryCity %></p>
+  <p><strong>Delivery State:</strong> <%= order.deliveryState %></p>
+  <p><strong>Phone Number:</strong> <%= order.userPhoneNumber %></p>
   <p><strong>Payment Status:</strong> <%= order.paymentStatus %></p>
+  
+  <!-- Just commenting out the code below incase I have need to use user's registered phone number instead of 
+  phone number entered when placing an order -->
+  <!-- <p><strong>Phone Number:</strong> <%= order.user.phoneNumber %></p>-->
+  
+  <!-- I'll uncomment this out once order delivery commences so can track and update order delivery status -->
+  <!-- <p><strong>Status:</strong> <%= order.status %></p> -->
+  
 
   <% if (order.paymentStatus === "Pending") { %>
     <form action="/payment/pay/<%= order._id %>" method="POST">
