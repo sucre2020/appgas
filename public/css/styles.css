@@ -380,7 +380,7 @@ table th {
 }
 
 /* Adjustments for Order placement Details */
-.order-details-container {
+.order-details-container, .payment-success-container {
   background-color: #fff;
   max-width: 600px;
   margin: 50px auto;
